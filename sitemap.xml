@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Main page -->
+  <url>
+    <loc>https://islamaoudia.me/</loc>
+    <lastmod>2025-09-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://islamaoudia.me/cover.png</image:loc>
+      <image:caption>Nour Islam Aoudia - Backend Developer Portfolio Cover</image:caption>
+      <image:title>Portfolio Cover</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://islamaoudia.me/Me-Pica.png</image:loc>
+      <image:caption>Professional photo of Nour Islam Aoudia</image:caption>
+      <image:title>Nour Islam Aoudia Photo</image:title>
+    </image:image>
+  </url>
+  
+  <!-- About section -->
+  <url>
+    <loc>https://islamaoudia.me/#about</loc>
+    <lastmod>2025-09-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Skills section -->
+  <url>
+    <loc>https://islamaoudia.me/#skills</loc>
+    <lastmod>2025-09-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Cybersecurity section -->
+  <url>
+    <loc>https://islamaoudia.me/#cybersecurity</loc>
+    <lastmod>2025-09-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://islamaoudia.me/project/secure_commu.jpg</image:loc>
+      <image:caption>Secure Communication System - Cybersecurity Project</image:caption>
+      <image:title>Secure Communication</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://islamaoudia.me/project/clooud.png</image:loc>
+      <image:caption>Cloud Security Lab - Infrastructure Security</image:caption>
+      <image:title>Cloud Security Lab</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://islamaoudia.me/project/crypto.png</image:loc>
+      <image:caption>CryptDecrypt - Encryption/Decryption Tool</image:caption>
+      <image:title>CryptDecrypt Tool</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Portfolio section -->
+  <url>
+    <loc>https://islamaoudia.me/#portfolio</loc>
+    <lastmod>2025-09-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- API Backend projects -->
+  <url>
+    <loc>https://islamaoudia.me/#autres</loc>
+    <lastmod>2025-09-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Full Stack projects -->
+  <url>
+    <loc>https://islamaoudia.me/#fullstack</loc>
+    <lastmod>2025-09-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- WordPress projects -->
+  <url>
+    <loc>https://islamaoudia.me/#wordpress</loc>
+    <lastmod>2025-09-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Static websites -->
+  <url>
+    <loc>https://islamaoudia.me/#static</loc>
+    <lastmod>2025-09-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Certificates section -->
+  <url>
+    <loc>https://islamaoudia.me/#certificat</loc>
+    <lastmod>2025-09-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <!-- Contact section -->
+  <url>
+    <loc>https://islamaoudia.me/#contact</loc>
+    <lastmod>2025-09-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+</urlset>

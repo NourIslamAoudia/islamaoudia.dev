@@ -1,0 +1,56 @@
+# Robots.txt for islamaoudia.me
+# This file tells search engine crawlers which pages they can or cannot access
+
+User-agent: *
+Allow: /
+
+# Allow access to CSS, JS, and image files
+Allow: /style.css
+Allow: /main.js
+Allow: /*.css
+Allow: /*.js
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.gif
+Allow: /*.svg
+Allow: /*.webp
+Allow: /*.ico
+Allow: /*.mp4
+Allow: /*.json
+
+# Disallow any potential sensitive directories (if they exist)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /.git/
+Disallow: /node_modules/
+Disallow: /.env
+
+# Sitemap location
+Sitemap: https://islamaoudia.me/sitemap.xml
+
+# Crawl delay (optional - helps prevent overwhelming the server)
+Crawl-delay: 1
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
+
+# Block any spam bots or unwanted crawlers
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
