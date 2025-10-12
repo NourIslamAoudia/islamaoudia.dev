@@ -208,6 +208,11 @@ document.addEventListener("DOMContentLoaded", () => {
   srRight.reveal(".contact__input, .contact__button", { delay: 400 });
   srRight.reveal("#right");
 
+  // ========== EMAILJS INITIALIZATION ==========
+  (function () {
+    emailjs.init("1T3pm_3Sfc-bUvAHW"); // Get this from EmailJS dashboard
+  })();
+
   // ========== FORMULAIRE DE CONTACT ==========
   const contactForm = document.querySelector(".contact__form");
   contactForm.addEventListener("submit", function (event) {
