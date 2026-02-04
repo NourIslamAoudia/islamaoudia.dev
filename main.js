@@ -108,6 +108,10 @@ let index = 0,
   isDeleting = false;
 
 function typeEffect() {
+  if (!subtitle) {
+    console.error("Element 'animated-subtitle' not found");
+    return;
+  }
   const displayedText = text.slice(0, index).replace(/\n/g, "<br>");
   subtitle.innerHTML = displayedText;
 
@@ -135,7 +139,10 @@ document.addEventListener("DOMContentLoaded", typeEffect);
 // ========== DOCUMENT PRÊT ==========
 document.addEventListener("DOMContentLoaded", () => {
   // Lecture vidéo plus rapide
-  document.querySelector(".portfolio__video").playbackRate = 3;
+  const video = document.querySelector(".portfolio__video");
+  if (video) {
+    video.playbackRate = 3;
+  }
 
   // Lottie Animation
   lottie.loadAnimation({
@@ -159,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const sectionTop = current.offsetTop - 50;
       const sectionId = current.getAttribute("id");
       const navLink = document.querySelector(
-        `.nav__menu a[href*=${sectionId}]`
+        `.nav__menu a[href*=${sectionId}]`,
       );
 
       if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
