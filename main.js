@@ -36,7 +36,13 @@ const showMenu = (toggleId, navId) => {
     }
   });
 
+  // Fermer le menu uniquement pour les liens principaux, pas les sous-menus
   nav.querySelectorAll(".nav__link").forEach((link) => {
+    link.addEventListener("click", closeMenu);
+  });
+
+  // Fermer le menu pour les liens du sous-menu "Project"
+  nav.querySelectorAll(".nav__dropdown-link").forEach((link) => {
     link.addEventListener("click", closeMenu);
   });
 };
@@ -197,7 +203,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Scroll Reveal - Left
   const srLeft = createScrollReveal("left");
-  srLeft.reveal(".about__img", { delay: 500 });
+  srLeft.reveal(".home__cta", { delay: 100 });
+  srLeft.reveal(".about__img", { delay: 400 });
   srLeft.reveal(".contact__subtitle, .contact__text", { interval: 200 });
   srLeft.reveal(".skills__subtitle");
   srLeft.reveal(".skill__icon-circle", { delay: 50, interval: 100 });
@@ -205,6 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Scroll Reveal - Right
   const srRight = createScrollReveal("right");
+  srRight.reveal(".home__img", { delay: 0 });
   srRight.reveal(".about__subtitle", { delay: 100 });
   srRight.reveal(".about__profession", { delay: 150 });
   srRight.reveal(".about__social, .about__social-icon", {
