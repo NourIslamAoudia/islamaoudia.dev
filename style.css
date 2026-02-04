@@ -430,7 +430,7 @@ img {
 
 .home__container {
   height: calc(100vh - var(--header-height));
-  row-gap: 5rem;
+  row-gap: 1rem;
   position: relative;
   z-index: 2;
 }
@@ -504,14 +504,14 @@ img {
 /* Mobile styles for download button */
 @media screen and (max-width: 768px) {
   .home__cta {
-    margin-bottom: 2rem;
+    margin-top:-45px;
   }
 
   .home__cta-btn {
-    padding: 0.75rem 1.5rem;
     font-size: 0.813rem;
     background-color: #ffffff !important;
     color: #34495e !important;
+    margin-bottom: 2rem;
   }
 
   .home__cta-btn i {
@@ -1670,8 +1670,6 @@ canvas {
 @media screen and (max-width: 768px) {
   .home__subtitle {
     font-size: 1rem;
-    margin-top: -4rem;
-    margin-bottom: 1.6rem;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); /* Plus prononcé sur mobile */
   }
 }
