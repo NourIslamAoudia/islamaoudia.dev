@@ -440,7 +440,7 @@ img {
   font-size: var(--big-font-size);
   color: var(--white-color);
   line-height: 0.9;
-  margin-top: 80px;
+  margin-top: 100px;
 }
 
 @keyframes blink-caret {
@@ -503,6 +503,9 @@ img {
 
 /* Mobile styles for download button */
 @media screen and (max-width: 768px) {
+  .home__title {
+  margin-top:0;
+}
   .home__cta {
     margin-top:-45px;
   }
