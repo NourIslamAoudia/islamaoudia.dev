@@ -212,7 +212,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Scroll Reveal - Right
   const srRight = createScrollReveal("right");
-  srRight.reveal(".home__img", { delay: 0 });
   srRight.reveal(".about__subtitle", { delay: 100 });
   srRight.reveal(".about__profession", { delay: 150 });
   srRight.reveal(".about__social, .about__social-icon", {
