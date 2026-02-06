@@ -512,6 +512,7 @@ img {
 
   .home__cta-btn {
     font-size: 0.813rem;
+    padding: 0.5rem 1rem;
     background-color: #ffffff !important;
     color: #34495e !important;
     margin-bottom: 2rem;
