@@ -107,41 +107,6 @@ const debouncedScroll = debounce(() => {
 
 // window.addEventListener('scroll', debouncedScroll);
 
-// ========== EFFET MACHINE À ÉCRIRE ==========
-const text = "● Développeur Backend\n● Architecte d’API & Bases de Données";
-const subtitle = document.getElementById("animated-subtitle");
-let index = 0,
-  isDeleting = false;
-
-function typeEffect() {
-  if (!subtitle) {
-    console.error("Element 'animated-subtitle' not found");
-    return;
-  }
-  const displayedText = text.slice(0, index).replace(/\n/g, "<br>");
-  subtitle.innerHTML = displayedText;
-
-  if (!isDeleting) {
-    if (index < text.length) {
-      index++;
-    } else {
-      isDeleting = true;
-      setTimeout(typeEffect, 1000);
-      return;
-    }
-  } else {
-    if (index > 0) {
-      index--;
-    } else {
-      isDeleting = false;
-    }
-  }
-
-  setTimeout(typeEffect, 50);
-}
-
-document.addEventListener("DOMContentLoaded", typeEffect);
-
 // ========== DOCUMENT PRÊT ==========
 document.addEventListener("DOMContentLoaded", () => {
   // Lecture vidéo plus rapide
@@ -151,13 +116,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Lottie Animation
-  lottie.loadAnimation({
-    container: document.getElementById("lottie-animation"),
-    renderer: "svg",
-    loop: true,
-    autoplay: true,
-    path: "user-interface-research.json",
-  });
+  const lottieContainer = document.getElementById("lottie-animation");
+  if (window.lottie && lottieContainer) {
+    lottie.loadAnimation({
+      container: lottieContainer,
+      renderer: "svg",
+      loop: true,
+      autoplay: true,
+      path: "user-interface-research.json",
+    });
+  }
 
   // Menu Mobile
   showMenu("nav-toggle", "nav-menu");
@@ -172,8 +140,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const sectionTop = current.offsetTop - 50;
       const sectionId = current.getAttribute("id");
       const navLink = document.querySelector(
-        `.nav__menu a[href*=${sectionId}]`,
+        `.nav__menu a[href*="${sectionId}"]`,
       );
+
+      if (!navLink) {
+        return;
+      }
 
       if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
         navLink.classList.add("active");
@@ -185,75 +157,103 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("scroll", scrollActive);
 
   // Scroll Reveal - Factory
-  const createScrollReveal = (origin, distance = "150px", duration = 1500) => {
-    return ScrollReveal({
+  if (window.ScrollReveal) {
+    const createScrollReveal = (
       origin,
-      distance,
-      duration,
-      reset: false,
+      distance = "150px",
+      duration = 1500,
+    ) => {
+      return ScrollReveal({
+        origin,
+        distance,
+        duration,
+        reset: false,
+      });
+    };
+
+    // Scroll Reveal - Top
+    const srTop = createScrollReveal("top");
+    srTop.reveal(".home__title");
+    srTop.reveal(".home__subtitle", { delay: 50 });
+    srTop.reveal(".home__scroll", { delay: 200 });
+    srTop.reveal(".portfolio__img, .portfolio__item", { interval: 200 });
+
+    // Scroll Reveal - Left
+    const srLeft = createScrollReveal("left");
+    srLeft.reveal(".home__cta", { delay: 100 });
+    srLeft.reveal(".about__img", { delay: 400 });
+    srLeft.reveal(".contact__subtitle, .contact__text", { interval: 200 });
+    srLeft.reveal(".skills__subtitle");
+    srLeft.reveal(".skill__icon-circle", { delay: 50, interval: 100 });
+    srLeft.reveal(".reveal-left");
+
+    // Scroll Reveal - Right
+    const srRight = createScrollReveal("right");
+    srRight.reveal(".about__subtitle", { delay: 100 });
+    srRight.reveal(".about__profession", { delay: 150 });
+    srRight.reveal(".about__social, .about__social-icon", {
+      delay: 300,
+      interval: 100,
     });
-  };
-
-  // Scroll Reveal - Top
-  const srTop = createScrollReveal("top");
-  srTop.reveal(".home__title");
-  srTop.reveal(".home__subtitle", { delay: 50 });
-  srTop.reveal(".home__scroll", { delay: 200 });
-  srTop.reveal(".portfolio__img, .portfolio__item", { interval: 200 });
-
-  // Scroll Reveal - Left
-  const srLeft = createScrollReveal("left");
-  srLeft.reveal(".home__cta", { delay: 100 });
-  srLeft.reveal(".about__img", { delay: 400 });
-  srLeft.reveal(".contact__subtitle, .contact__text", { interval: 200 });
-  srLeft.reveal(".skills__subtitle");
-  srLeft.reveal(".skill__icon-circle", { delay: 50, interval: 100 });
-  srLeft.reveal("#left");
-
-  // Scroll Reveal - Right
-  const srRight = createScrollReveal("right");
-  srRight.reveal(".about__subtitle", { delay: 100 });
-  srRight.reveal(".about__profession", { delay: 150 });
-  srRight.reveal(".about__social, .about__social-icon", {
-    delay: 300,
-    interval: 100,
-  });
-  srRight.reveal(".chart-container", { delay: 0 });
-  srRight.reveal(".contact__input, .contact__button", { delay: 400 });
-  srRight.reveal("#right");
+    srRight.reveal(".chart-container", { delay: 0 });
+    srRight.reveal(".contact__input, .contact__button", { delay: 400 });
+    srRight.reveal(".reveal-right");
+  }
 
   // ========== EMAILJS INITIALIZATION ==========
-  (function () {
+  if (window.emailjs) {
     emailjs.init("1T3pm_3Sfc-bUvAHW"); // Get this from EmailJS dashboard
-  })();
+  }
 
   // ========== FORMULAIRE DE CONTACT ==========
   const contactForm = document.querySelector(".contact__form");
-  contactForm.addEventListener("submit", function (event) {
-    event.preventDefault();
+  if (contactForm) {
+    contactForm.addEventListener("submit", function (event) {
+      event.preventDefault();
 
-    emailjs
-      .sendForm("service_k2aerfo", "template_rj5fxem", this)
-      .then(() => {
-        Swal.fire({
-          title: "Message envoyé avec succès!",
-          icon: "success",
-          confirmButtonText: "OK",
-        });
-      })
-      .catch((error) => {
-        console.error("Erreur:", error);
-        Swal.fire({
-          title: "Erreur lors de l'envoi du message",
-          icon: "error",
-          confirmButtonText: "OK",
-        });
-      });
-  });
+      if (window.emailjs) {
+        emailjs
+          .sendForm("service_k2aerfo", "template_rj5fxem", this)
+          .then(() => {
+            if (window.Swal) {
+              Swal.fire({
+                title: "Message envoyé avec succès!",
+                icon: "success",
+                confirmButtonText: "OK",
+              });
+            } else {
+              window.alert("Message envoyé avec succès!");
+            }
+          })
+          .catch((error) => {
+            console.error("Erreur:", error);
+            if (window.Swal) {
+              Swal.fire({
+                title: "Erreur lors de l'envoi du message",
+                icon: "error",
+                confirmButtonText: "OK",
+              });
+            } else {
+              window.alert("Erreur lors de l'envoi du message");
+            }
+          });
+        return;
+      }
+
+      window.alert(
+        "Le service de contact n'est pas disponible pour le moment.",
+      );
+    });
+  }
 
   // ========== GRAPHIQUE RADAR ==========
   window.addEventListener("load", function () {
-    const ctx = document.getElementById("radarChart").getContext("2d");
+    const radarCanvas = document.getElementById("radarChart");
+    if (!window.Chart || !radarCanvas) {
+      return;
+    }
+
+    const ctx = radarCanvas.getContext("2d");
 
     function getResponsiveFontSize() {
       return window.innerWidth < 768 ? 10 : 14;
