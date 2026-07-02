@@ -42,10 +42,7 @@
       return "Unexpected Supabase error.";
     }
 
-    if (
-      error.message &&
-      error.message.includes("row-level security policy")
-    ) {
+    if (error.message && error.message.includes("row-level security policy")) {
       return [
         "Supabase refused this action because this account is not in portfolio_admins.",
         "Copy your Auth user id from Supabase Authentication > Users, then insert it into public.portfolio_admins.",
@@ -218,7 +215,9 @@
       const visibilityButton = document.createElement("button");
       visibilityButton.type = "button";
       visibilityButton.className = "admin-button admin-button--ghost";
-      visibilityButton.textContent = project.is_published ? "Masquer" : "Afficher";
+      visibilityButton.textContent = project.is_published
+        ? "Masquer"
+        : "Afficher";
       visibilityButton.addEventListener("click", () =>
         toggleProjectVisibility(project),
       );
@@ -272,7 +271,7 @@
     authPanel.hidden = false;
     adminPanel.hidden = true;
     signOutButton.hidden = true;
-    setStatus("Sign in with your Supabase admin account.", "info");
+    setStatus("All Good", "info");
   };
 
   const saveProject = async (event) => {
@@ -324,7 +323,9 @@
       setStatus(formatSupabaseError(error), "error");
     } finally {
       submitButton.disabled = false;
-      submitButton.textContent = state.editingId ? "Update project" : "Add project";
+      submitButton.textContent = state.editingId
+        ? "Update project"
+        : "Add project";
     }
   };
 
