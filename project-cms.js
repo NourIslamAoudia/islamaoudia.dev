@@ -27,42 +27,113 @@
     {
       field: "source_url",
       label: "Code",
+      labelKey: "link.code",
       icon: "fab fa-github",
       className: "portfolio__link-name",
     },
     {
       field: "demo_url",
       label: "Demo",
+      labelKey: "link.demo",
       icon: "fas fa-external-link-alt",
       className: "portfolio__link-demo",
     },
     {
       field: "documentation_url",
       label: "Documentation",
+      labelKey: "link.documentation",
       icon: "fas fa-book",
       className: "portfolio__link-demo",
     },
     {
       field: "api_url",
       label: "Test API",
+      labelKey: "link.testApi",
       icon: "fas fa-server",
       className: "portfolio__link-demo",
     },
     {
       field: "canva_url",
       label: "Canva",
+      labelKey: "link.canvaReport",
       icon: "fas fa-file-powerpoint",
       className: "portfolio__link-demo",
     },
     {
       field: "video_url",
       label: "Video",
+      labelKey: "link.demo",
       icon: "fas fa-play",
       className: "portfolio__link-demo",
     },
   ];
 
   const createText = (text) => document.createTextNode(text || "");
+  const translate = (key, fallback) =>
+    window.getPortfolioTranslation?.(key) || fallback;
+  const getCurrentLanguage = () => window.getPortfolioLanguage?.() || "en";
+  const toDatasetKey = (field, language) =>
+    `${field}${language.charAt(0).toUpperCase()}${language.slice(1)}`;
+  const getLocalizedProjectText = (project, field) => {
+    const language = getCurrentLanguage();
+    return (
+      project[`${field}_${language}`] ||
+      project[`${field}_en`] ||
+      project[field] ||
+      ""
+    );
+  };
+
+  const setLocalizedProjectDataset = (element, project, field) => {
+    ["en", "fr", "it"].forEach((language) => {
+      element.dataset[toDatasetKey(field, language)] =
+        project[`${field}_${language}`] || "";
+    });
+    element.dataset[`${field}Default`] = project[field] || "";
+  };
+
+  const getLocalizedElementText = (element, field) => {
+    const language = getCurrentLanguage();
+    return (
+      element.dataset[toDatasetKey(field, language)] ||
+      element.dataset[toDatasetKey(field, "en")] ||
+      element.dataset[`${field}Default`] ||
+      ""
+    );
+  };
+
+  const refreshDynamicProjectLanguages = () => {
+    document
+      .querySelectorAll(".portfolio__item--dynamic .portfolio__title")
+      .forEach((title) => {
+        title.textContent = getLocalizedElementText(title, "title");
+      });
+
+    document
+      .querySelectorAll(".portfolio__item--dynamic .portfolio__description")
+      .forEach((description) => {
+        description.textContent = getLocalizedElementText(
+          description,
+          "description",
+        );
+      });
+
+    document
+      .querySelectorAll(".portfolio__item--dynamic .portfolio__links a")
+      .forEach((link) => {
+        const icon = link.querySelector("i");
+        const label = translate(link.dataset.labelKey, link.dataset.labelFallback);
+
+        link.textContent = "";
+        if (icon) {
+          link.appendChild(icon);
+          link.appendChild(createText(" "));
+        }
+        link.appendChild(createText(label));
+      });
+  };
+
+  window.refreshDynamicProjectLanguages = refreshDynamicProjectLanguages;
 
   const createProjectCard = (project) => {
     const item = document.createElement("article");
@@ -74,7 +145,7 @@
 
       const image = document.createElement("img");
       image.src = project.image_url;
-      image.alt = project.title;
+      image.alt = getLocalizedProjectText(project, "title");
       image.loading = "lazy";
       imageWrap.appendChild(image);
       item.appendChild(imageWrap);
@@ -85,12 +156,16 @@
 
     const title = document.createElement("h3");
     title.className = "portfolio__title";
-    title.appendChild(createText(project.title));
+    setLocalizedProjectDataset(title, project, "title");
+    title.appendChild(createText(getLocalizedProjectText(project, "title")));
     content.appendChild(title);
 
     const description = document.createElement("p");
     description.className = "portfolio__description";
-    description.appendChild(createText(project.description));
+    setLocalizedProjectDataset(description, project, "description");
+    description.appendChild(
+      createText(getLocalizedProjectText(project, "description")),
+    );
     content.appendChild(description);
 
     if (Array.isArray(project.tech_stack) && project.tech_stack.length) {
@@ -132,11 +207,15 @@
         anchor.className = definition.className;
         anchor.target = "_blank";
         anchor.rel = "noopener noreferrer";
+        anchor.dataset.labelKey = definition.labelKey;
+        anchor.dataset.labelFallback = definition.label;
 
         const icon = document.createElement("i");
         icon.className = definition.icon;
         anchor.appendChild(icon);
-        anchor.appendChild(createText(` ${definition.label}`));
+        anchor.appendChild(
+          createText(` ${translate(definition.labelKey, definition.label)}`),
+        );
         linksWrap.appendChild(anchor);
       });
 
@@ -168,7 +247,7 @@
 
     const title = document.createElement("h3");
     title.className = "portfolio-subsection-title";
-    title.textContent = "Other Projects";
+    title.textContent = translate("projects.other", "Other Projects");
 
     const container = document.createElement("div");
     container.className = "portfolio__container";
@@ -221,13 +300,15 @@
     });
 
     revealDynamicProjects(renderedItems);
+    window.applyPortfolioLanguage?.();
+    refreshDynamicProjectLanguages();
   };
 
   document.addEventListener("DOMContentLoaded", async () => {
     const { data, error } = await supabaseClient
       .from("portfolio_projects")
       .select(
-        "id,title,description,image_url,tech_stack,type,demo_url,documentation_url,source_url,canva_url,api_url,video_url,sort_order,is_featured",
+        "id,title,description,title_en,title_fr,title_it,description_en,description_fr,description_it,image_url,tech_stack,type,demo_url,documentation_url,source_url,canva_url,api_url,video_url,sort_order,is_featured",
       )
       .eq("is_published", true)
       .order("sort_order", { ascending: true })

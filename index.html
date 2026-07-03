@@ -12,7 +12,7 @@
       content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
     />
     <meta name="googlebot" content="index, follow" />
-    <meta name="language" content="en, fr" />
+    <meta name="language" content="en, fr, it" />
     <meta name="theme-color" content="#34495e" />
 
     <!-- Canonical URL -->
@@ -112,6 +112,9 @@
 
     <!-- Alternate Language Versions -->
     <link rel="alternate" hreflang="en" href="https://islamaoudia.dev/" />
+    <link rel="alternate" hreflang="fr" href="https://islamaoudia.dev/" />
+    <link rel="alternate" hreflang="it" href="https://islamaoudia.dev/" />
+    <link rel="alternate" hreflang="x-default" href="https://islamaoudia.dev/" />
 
     <!-- Sitemap -->
     <link
@@ -210,8 +213,37 @@
           </ul>
         </div>
 
-        <div class="nav__toggle" id="nav-toggle">
-          <i class="bx bx-menu"></i>
+        <div class="nav__actions">
+          <div class="language-switcher" aria-label="Language selector">
+            <button
+              class="language-switcher__button active"
+              type="button"
+              data-lang="en"
+              aria-pressed="true"
+            >
+              EN
+            </button>
+            <button
+              class="language-switcher__button"
+              type="button"
+              data-lang="it"
+              aria-pressed="false"
+            >
+              IT
+            </button>
+            <button
+              class="language-switcher__button"
+              type="button"
+              data-lang="fr"
+              aria-pressed="false"
+            >
+              FR
+            </button>
+          </div>
+
+          <div class="nav__toggle" id="nav-toggle">
+            <i class="bx bx-menu"></i>
+          </div>
         </div>
       </nav>
     </header>
@@ -1075,13 +1107,7 @@
                     <a
                       href="#contact"
                       class="portfolio__link-name"
-                      onclick="
-                        event.preventDefault();
-                        alert('To access the code, please contact me.');
-                        document
-                          .getElementById('contact')
-                          .scrollIntoView({ behavior: 'smooth' });
-                      "
+                      onclick="showPrivateCodeNotice(event)"
                     >
                       <i class="fas fa-lock"></i> Private Code
                     </a>

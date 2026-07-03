@@ -125,10 +125,18 @@
 
   const getProjectPayload = () => {
     const data = new FormData(form);
+    const title = data.get("title").trim();
+    const description = data.get("description").trim();
 
     return {
-      title: data.get("title").trim(),
-      description: data.get("description").trim(),
+      title,
+      description,
+      title_en: title,
+      description_en: description,
+      title_fr: data.get("title_fr").trim() || null,
+      description_fr: data.get("description_fr").trim() || null,
+      title_it: data.get("title_it").trim() || null,
+      description_it: data.get("description_it").trim() || null,
       image_url: data.get("image_url").trim() || null,
       tech_stack: parseTechStack(data.get("tech_stack") || ""),
       type: data.get("type"),
@@ -145,8 +153,13 @@
   };
 
   const fillForm = (project) => {
-    form.elements.title.value = project.title || "";
-    form.elements.description.value = project.description || "";
+    form.elements.title.value = project.title_en || project.title || "";
+    form.elements.description.value =
+      project.description_en || project.description || "";
+    form.elements.title_fr.value = project.title_fr || "";
+    form.elements.description_fr.value = project.description_fr || "";
+    form.elements.title_it.value = project.title_it || "";
+    form.elements.description_it.value = project.description_it || "";
     form.elements.image_url.value = project.image_url || "";
     form.elements.tech_stack.value = (project.tech_stack || []).join(", ");
     form.elements.type.value = project.type || "other";
@@ -192,7 +205,7 @@
 
       const text = document.createElement("div");
       const title = document.createElement("h3");
-      title.textContent = project.title;
+      title.textContent = project.title_en || project.title;
 
       const meta = document.createElement("p");
       meta.textContent = `${project.type} - order ${project.sort_order}`;
