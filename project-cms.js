@@ -69,6 +69,7 @@
   ];
 
   const createText = (text) => document.createTextNode(text || "");
+  const encodeSlug = (slug) => encodeURIComponent(slug || "");
   const translate = (key, fallback) =>
     window.getPortfolioTranslation?.(key) || fallback;
   const getCurrentLanguage = () => window.getPortfolioLanguage?.() || "en";
@@ -123,13 +124,18 @@
       .forEach((link) => {
         const icon = link.querySelector("i");
         const label = translate(link.dataset.labelKey, link.dataset.labelFallback);
+        const isDetailsLink = link.classList.contains("portfolio__link-details");
 
         link.textContent = "";
-        if (icon) {
+        if (icon && !isDetailsLink) {
           link.appendChild(icon);
           link.appendChild(createText(" "));
         }
         link.appendChild(createText(label));
+        if (icon && isDetailsLink) {
+          link.appendChild(createText(" "));
+          link.appendChild(icon);
+        }
       });
   };
 
@@ -189,8 +195,9 @@
     }
 
     const links = linkDefinitions.filter((definition) => project[definition.field]);
+    const hasMoreInfo = Boolean(project.slug);
 
-    if (links.length) {
+    if (links.length || hasMoreInfo) {
       const divider = document.createElement("hr");
       divider.className = "portfolio__divider";
       content.appendChild(divider);
@@ -218,6 +225,23 @@
         );
         linksWrap.appendChild(anchor);
       });
+
+      if (hasMoreInfo) {
+        const detailsLink = document.createElement("a");
+        detailsLink.href = `project-detail.html?slug=${encodeSlug(project.slug)}`;
+        detailsLink.className = "portfolio__link-details";
+        detailsLink.dataset.labelKey = "link.moreInfo";
+        detailsLink.dataset.labelFallback = "Plus d'info";
+
+        detailsLink.appendChild(
+          createText(translate("link.moreInfo", "Plus d'info")),
+        );
+
+        const icon = document.createElement("i");
+        icon.className = "fas fa-arrow-right";
+        detailsLink.appendChild(icon);
+        linksWrap.appendChild(detailsLink);
+      }
 
       overlay.appendChild(linksWrap);
       content.appendChild(overlay);
@@ -277,14 +301,18 @@
 
     ScrollReveal({
       origin: "top",
-      distance: "150px",
-      duration: 1500,
+      distance: "80px",
+      duration: 700,
       reset: false,
-    }).reveal(revealTargets, { interval: 200 });
+    }).reveal(revealTargets, { interval: 80 });
   };
 
   const renderProjects = (projects) => {
     const renderedItems = [];
+
+    Object.values(typeTargets).forEach((selector) => {
+      document.querySelector(selector)?.replaceChildren();
+    });
 
     projects.forEach((project) => {
       const target =
@@ -308,7 +336,7 @@
     const { data, error } = await supabaseClient
       .from("portfolio_projects")
       .select(
-        "id,title,description,title_en,title_fr,title_it,description_en,description_fr,description_it,image_url,tech_stack,type,demo_url,documentation_url,source_url,canva_url,api_url,video_url,sort_order,is_featured",
+        "id,slug,title,description,title_en,title_fr,title_it,description_en,description_fr,description_it,image_url,tech_stack,type,demo_url,documentation_url,source_url,canva_url,api_url,video_url,sort_order,is_featured",
       )
       .eq("is_published", true)
       .order("sort_order", { ascending: true })

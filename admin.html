@@ -56,9 +56,34 @@
         </form>
       </section>
 
-      <section class="admin-grid" id="admin-panel" hidden>
-        <form class="admin-card admin-form" id="project-form">
-          <h2>Project content</h2>
+      <section class="admin-grid admin-stack" id="admin-panel" hidden>
+        <section class="admin-card admin-project-browser">
+          <div class="admin-card__header">
+            <div>
+              <h2>All projects</h2>
+              <p>Projects are grouped by type. Choose one to edit its details.</p>
+            </div>
+            <button
+              class="admin-button"
+              id="new-project"
+              type="button"
+            >
+              Add project
+            </button>
+          </div>
+          <label class="admin-search">
+            Search by project name
+            <input
+              id="project-search"
+              type="search"
+              placeholder="Search LAMSA, WordPress, API..."
+            />
+          </label>
+          <div class="admin-projects" id="projects-list"></div>
+        </section>
+
+        <form class="admin-card admin-form admin-editor" id="project-form">
+          <h2 id="editor-title">Project content</h2>
 
           <label>
             Title (English / default)
@@ -66,8 +91,23 @@
           </label>
 
           <label>
+            Slug
+            <input name="slug" type="text" placeholder="lamsa" />
+          </label>
+
+          <label>
             Description (English / default)
             <textarea name="description" rows="5" required></textarea>
+          </label>
+
+          <label>
+            Detail title (English / default)
+            <input name="detail_title" type="text" />
+          </label>
+
+          <label>
+            Detail text (English / default)
+            <textarea name="detail_body" rows="8"></textarea>
           </label>
 
           <div class="admin-language-group">
@@ -80,6 +120,14 @@
               Description FR
               <textarea name="description_fr" rows="4"></textarea>
             </label>
+            <label>
+              Detail title FR
+              <input name="detail_title_fr" type="text" />
+            </label>
+            <label>
+              Detail text FR
+              <textarea name="detail_body_fr" rows="6"></textarea>
+            </label>
           </div>
 
           <div class="admin-language-group">
@@ -91,6 +139,14 @@
             <label>
               Description IT
               <textarea name="description_it" rows="4"></textarea>
+            </label>
+            <label>
+              Detail title IT
+              <input name="detail_title_it" type="text" />
+            </label>
+            <label>
+              Detail text IT
+              <textarea name="detail_body_it" rows="6"></textarea>
             </label>
           </div>
 
@@ -115,7 +171,7 @@
             Photo link
             <input
               name="image_url"
-              type="url"
+              type="text"
               placeholder="https://... or project/image.png"
             />
           </label>
@@ -128,6 +184,29 @@
               accept="image/jpeg,image/png,image/webp,image/gif"
             />
           </label>
+
+          <label>
+            Upload gallery photos
+            <input
+              name="gallery_files"
+              type="file"
+              accept="image/jpeg,image/png,image/webp,image/gif"
+              multiple
+            />
+          </label>
+
+          <label>
+            Gallery photo format
+            <select name="gallery_image_type">
+              <option value="desktop">Desktop / wide screenshot</option>
+              <option value="phone">Phone / mobile screenshot</option>
+            </select>
+          </label>
+
+          <div class="admin-gallery-manager" id="gallery-manager" hidden>
+            <h3>Project gallery</h3>
+            <div class="admin-gallery-list" id="gallery-list"></div>
+          </div>
 
           <label>
             Technologies
@@ -196,11 +275,6 @@
             </button>
           </div>
         </form>
-
-        <section class="admin-card">
-          <h2>Dynamic projects</h2>
-          <div class="admin-projects" id="projects-list"></div>
-        </section>
       </section>
     </main>
 

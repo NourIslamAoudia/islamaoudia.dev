@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Project details from Nour Islam Aoudia portfolio."
+    />
+    <link rel="icon" type="image/png" href="code.png" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <title>Project Details | Nour Islam Aoudia</title>
+  </head>
+  <body class="project-detail-body">
+    <header class="detail-header">
+      <a class="detail-back" href="index.html#portfolio">
+        <i class="bx bx-arrow-back"></i>
+        <span data-detail-i18n="back">Back to portfolio</span>
+      </a>
+
+      <div class="language-switcher" aria-label="Language selector">
+        <button
+          class="language-switcher__button active"
+          type="button"
+          data-lang="en"
+          aria-pressed="true"
+        >
+          EN
+        </button>
+        <button
+          class="language-switcher__button"
+          type="button"
+          data-lang="it"
+          aria-pressed="false"
+        >
+          IT
+        </button>
+        <button
+          class="language-switcher__button"
+          type="button"
+          data-lang="fr"
+          aria-pressed="false"
+        >
+          FR
+        </button>
+      </div>
+    </header>
+
+    <main class="project-detail-shell">
+      <p class="project-detail-status" id="project-detail-status">
+        Loading project...
+      </p>
+      <article class="project-detail" id="project-detail" hidden>
+        <div class="project-detail__hero">
+          <div>
+            <p class="project-detail__eyebrow" id="project-detail-type"></p>
+            <h1 id="project-detail-title"></h1>
+            <div class="project-detail__tech" id="project-detail-tech"></div>
+            <div class="project-detail__links" id="project-detail-links"></div>
+          </div>
+          <img id="project-detail-cover" alt="" hidden />
+        </div>
+
+        <section class="project-detail__section">
+          <h2 data-detail-i18n="overview">Overview</h2>
+          <div class="project-detail__body" id="project-detail-body"></div>
+        </section>
+
+        <section class="project-detail__section" id="project-gallery-section">
+          <h2 data-detail-i18n="gallery">Gallery</h2>
+          <div class="project-detail__gallery" id="project-detail-gallery"></div>
+        </section>
+      </article>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="project-detail.js"></script>
+  </body>
+</html>

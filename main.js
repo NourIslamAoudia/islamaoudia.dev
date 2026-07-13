@@ -131,6 +131,7 @@ const translations = {
     "link.canvaReport": "Canva Report",
     "link.webSite": "Web Site",
     "link.privateCode": "Private Code",
+    "link.moreInfo": "More info",
     "privateCode.alert": "To access the code, please contact me.",
   },
   it: {
@@ -239,6 +240,7 @@ const translations = {
     "link.canvaReport": "Report Canva",
     "link.webSite": "Sito web",
     "link.privateCode": "Codice privato",
+    "link.moreInfo": "Maggiori info",
     "privateCode.alert": "Per accedere al codice, contattami.",
   },
   fr: {
@@ -347,6 +349,7 @@ const translations = {
     "link.canvaReport": "Rapport Canva",
     "link.webSite": "Site web",
     "link.privateCode": "Code privé",
+    "link.moreInfo": "Plus d'info",
     "privateCode.alert": "Pour accéder au code, contactez-moi.",
   },
 };
@@ -473,91 +476,12 @@ const applyLanguage = (language) => {
   setText(".skills__subtitle", "skills.subtitle");
 
   setText("#cybersecurity > .section-title", "cyber.title");
-  setText(
-    "#cybersecurity .portfolio__item:nth-child(1) .portfolio__description",
-    "cyber.securecorp",
-  );
-  setText(
-    "#cybersecurity .portfolio__item:nth-child(2) .portfolio__description",
-    "cyber.secureCommunication",
-  );
-  setText(
-    "#cybersecurity .portfolio__item:nth-child(3) .portfolio__description",
-    "cyber.cloudLab",
-  );
-  setText(
-    "#cybersecurity .portfolio__item:nth-child(4) .portfolio__description",
-    "cyber.cryptDecrypt",
-  );
 
   setText("#portfolio .section-title", "projects.title");
   setText("#autres .portfolio-subsection-title", "projects.apis");
   setText("#fullstack .portfolio-subsection-title", "projects.fullstack");
   setText("#wordpress .portfolio-subsection-title", "projects.wordpress");
   setText("#other-projects .portfolio-subsection-title", "projects.other");
-  setText(
-    "#autres .portfolio__item:nth-child(1) .portfolio__description",
-    "project.nutritrack",
-  );
-  setText(
-    "#autres .portfolio__item:nth-child(2) .portfolio__description",
-    "project.wilayas",
-  );
-  setText(
-    "#autres .portfolio__item:nth-child(3) .portfolio__description",
-    "project.contactManager",
-  );
-  setText(
-    "#autres .portfolio__item:nth-child(4) .portfolio__description",
-    "project.hrManager",
-  );
-  setText(
-    "#fullstack .portfolio__item:nth-child(1) .portfolio__description",
-    "project.lamsa",
-  );
-  setText(
-    "#fullstack .portfolio__item:nth-child(2) .portfolio__description",
-    "project.vamos",
-  );
-  setText(
-    "#wordpress .portfolio__item:nth-child(1) .portfolio__description",
-    "project.alina",
-  );
-  setText(
-    "#wordpress .portfolio__item:nth-child(2) .portfolio__description",
-    "project.chausskids",
-  );
-  setText(
-    "#wordpress .portfolio__item:nth-child(3) .portfolio__description",
-    "project.urbanmen",
-  );
-  setText(
-    "#wordpress .portfolio__item:nth-child(4) .portfolio__description",
-    "project.checkout",
-  );
-
-  setIconText("#cybersecurity .portfolio__item:nth-child(1) .portfolio__link-name", "link.code");
-  setIconText("#cybersecurity .portfolio__item:nth-child(2) .portfolio__link-name", "link.code");
-  setIconText("#cybersecurity .portfolio__item:nth-child(3) .portfolio__link-demo", "link.canvaReport");
-  setIconText("#cybersecurity .portfolio__item:nth-child(4) .portfolio__link-name", "link.code");
-  setIconText("#cybersecurity .portfolio__item:nth-child(4) .portfolio__link-demo", "link.demo");
-  setIconText("#autres .portfolio__item:nth-child(1) .portfolio__link-name", "link.viewDemo");
-  setIconText("#autres .portfolio__item:nth-child(1) .portfolio__link-demo", "link.documentation");
-  setIconText("#autres .portfolio__item:nth-child(2) .portfolio__link-name", "link.viewDemo");
-  setIconText("#autres .portfolio__item:nth-child(2) .portfolio__link-demo", "link.testApi");
-  setIconText("#autres .portfolio__item:nth-child(3) .portfolio__link-demo:nth-child(1)", "link.documentation");
-  setIconText("#autres .portfolio__item:nth-child(3) .portfolio__link-demo:nth-child(2)", "link.testApi");
-  setIconText("#autres .portfolio__item:nth-child(4) .portfolio__link-name", "link.sourceCode");
-  setIconText("#autres .portfolio__item:nth-child(4) .portfolio__link-demo", "link.documentation");
-  setIconText(
-    "#fullstack .portfolio__item:not(.portfolio__item--dynamic) .portfolio__link-demo",
-    "link.viewDemo",
-  );
-  setIconText("#wordpress .portfolio__item:nth-child(1) .portfolio__link-demo", "link.webSite");
-  setIconText("#wordpress .portfolio__item:nth-child(2) .portfolio__link-demo", "link.webSite");
-  setIconText("#wordpress .portfolio__item:nth-child(3) .portfolio__link-demo", "link.viewDemo");
-  setIconText("#wordpress .portfolio__item:nth-child(4) .portfolio__link-name", "link.privateCode");
-  setIconText("#wordpress .portfolio__item:nth-child(4) .portfolio__link-demo", "link.viewDemo");
 
   setText("#certificat > .section-title", "certificate.title");
   setText("#certificat > .certificat__container .certificat__title", "certificate.fastapiTitle");
@@ -795,8 +719,8 @@ document.addEventListener("DOMContentLoaded", () => {
   if (window.ScrollReveal) {
     const createScrollReveal = (
       origin,
-      distance = "150px",
-      duration = 1500,
+      distance = "80px",
+      duration = 700,
     ) => {
       return ScrollReveal({
         origin,
@@ -810,28 +734,28 @@ document.addEventListener("DOMContentLoaded", () => {
     const srTop = createScrollReveal("top");
     srTop.reveal(".home__title");
     srTop.reveal(".home__subtitle", { delay: 50 });
-    srTop.reveal(".home__scroll", { delay: 200 });
-    srTop.reveal(".portfolio__img, .portfolio__item", { interval: 200 });
+    srTop.reveal(".home__scroll", { delay: 100 });
+    srTop.reveal(".portfolio__img, .portfolio__item", { interval: 80 });
 
     // Scroll Reveal - Left
     const srLeft = createScrollReveal("left");
-    srLeft.reveal(".home__cta", { delay: 100 });
-    srLeft.reveal(".about__img", { delay: 400 });
-    srLeft.reveal(".contact__subtitle, .contact__text", { interval: 200 });
+    srLeft.reveal(".home__cta", { delay: 80 });
+    srLeft.reveal(".about__img", { delay: 120 });
+    srLeft.reveal(".contact__subtitle, .contact__text", { interval: 80 });
     srLeft.reveal(".skills__subtitle");
-    srLeft.reveal(".skill__icon-circle", { delay: 50, interval: 100 });
+    srLeft.reveal(".skill__icon-circle", { delay: 40, interval: 45 });
     srLeft.reveal(".reveal-left");
 
     // Scroll Reveal - Right
     const srRight = createScrollReveal("right");
-    srRight.reveal(".about__subtitle", { delay: 100 });
-    srRight.reveal(".about__profession", { delay: 150 });
+    srRight.reveal(".about__subtitle", { delay: 70 });
+    srRight.reveal(".about__profession", { delay: 90 });
     srRight.reveal(".about__social, .about__social-icon", {
-      delay: 300,
-      interval: 100,
+      delay: 100,
+      interval: 60,
     });
     srRight.reveal(".chart-container", { delay: 0 });
-    srRight.reveal(".contact__input, .contact__button", { delay: 400 });
+    srRight.reveal(".contact__input, .contact__button", { delay: 120 });
     srRight.reveal(".reveal-right");
   }
 
@@ -922,8 +846,8 @@ document.addEventListener("DOMContentLoaded", () => {
         responsive: true,
         maintainAspectRatio: false,
         animation: {
-          duration: 2000,
-          easing: "easeInOutQuart",
+          duration: 800,
+          easing: "easeOutQuart",
         },
         scales: {
           r: {
