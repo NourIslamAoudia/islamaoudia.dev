@@ -278,6 +278,38 @@ img {
   outline-offset: 2px;
 }
 
+@media screen and (max-width: 768px) {
+  .nav__actions {
+    gap: 0.45rem;
+    margin-left: auto;
+  }
+
+  .language-switcher {
+    gap: 0.12rem;
+    padding: 0.12rem;
+  }
+
+  .language-switcher__button {
+    min-width: 1.72rem;
+    height: 1.5rem;
+    padding: 0 0.35rem;
+    font-size: 0.68rem;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .nav__actions {
+    gap: 0.3rem;
+  }
+
+  .language-switcher__button {
+    min-width: 1.5rem;
+    height: 1.35rem;
+    padding: 0 0.25rem;
+    font-size: 0.62rem;
+  }
+}
+
 /* BONUS: Variantes d'effet hover */
 
 /* Effet hover avec ligne qui vient du centre */
@@ -2468,6 +2500,22 @@ canvas {
     display: grid;
   }
 
+  .detail-header {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .detail-back {
+    min-width: 0;
+  }
+
+  .detail-back span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   .admin-gallery-item img {
     width: 100%;
   }
@@ -2480,6 +2528,21 @@ canvas {
   .project-detail__gallery-item--phone {
     width: min(100%, 240px);
     justify-self: center;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .detail-header {
+    grid-template-columns: minmax(0, 1fr) auto;
+    justify-items: stretch;
+    gap: 8px;
+  }
+
+  .detail-header .language-switcher__button {
+    min-width: 1.45rem;
+    height: 1.35rem;
+    padding: 0 0.22rem;
+    font-size: 0.6rem;
   }
 }
 
