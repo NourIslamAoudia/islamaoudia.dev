@@ -297,10 +297,11 @@
     const { data: project, error } = await state.client
       .from("portfolio_projects")
       .select(
-        "id,slug,title,description,title_en,title_fr,title_it,description_en,description_fr,description_it,detail_title_en,detail_title_fr,detail_title_it,detail_body_en,detail_body_fr,detail_body_it,image_url,tech_stack,type,demo_url,documentation_url,source_url,canva_url,api_url,video_url,is_published",
+        "id,slug,title,description,title_en,title_fr,title_it,description_en,description_fr,description_it,detail_title_en,detail_title_fr,detail_title_it,detail_body_en,detail_body_fr,detail_body_it,image_url,tech_stack,type,demo_url,documentation_url,source_url,canva_url,api_url,video_url,is_published,show_details",
       )
       .eq("slug", slug)
       .eq("is_published", true)
+      .eq("show_details", true)
       .single();
 
     if (error || !project) {

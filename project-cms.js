@@ -195,7 +195,7 @@
     }
 
     const links = linkDefinitions.filter((definition) => project[definition.field]);
-    const hasMoreInfo = Boolean(project.slug);
+    const hasMoreInfo = Boolean(project.slug && project.show_details);
 
     if (links.length || hasMoreInfo) {
       const divider = document.createElement("hr");
@@ -336,7 +336,7 @@
     const { data, error } = await supabaseClient
       .from("portfolio_projects")
       .select(
-        "id,slug,title,description,title_en,title_fr,title_it,description_en,description_fr,description_it,image_url,tech_stack,type,demo_url,documentation_url,source_url,canva_url,api_url,video_url,sort_order,is_featured",
+        "id,slug,title,description,title_en,title_fr,title_it,description_en,description_fr,description_it,image_url,tech_stack,type,demo_url,documentation_url,source_url,canva_url,api_url,video_url,sort_order,is_featured,show_details",
       )
       .eq("is_published", true)
       .order("sort_order", { ascending: true })

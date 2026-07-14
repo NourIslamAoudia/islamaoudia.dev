@@ -198,6 +198,7 @@
       video_url: data.get("video_url").trim() || null,
       sort_order: Number(data.get("sort_order") || 100),
       is_featured: data.get("is_featured") === "on",
+      show_details: data.get("show_details") === "on",
       is_published: data.get("is_published") === "on",
     };
   };
@@ -228,6 +229,7 @@
     form.elements.video_url.value = project.video_url || "";
     form.elements.sort_order.value = project.sort_order ?? 100;
     form.elements.is_featured.checked = Boolean(project.is_featured);
+    form.elements.show_details.checked = Boolean(project.show_details);
     form.elements.is_published.checked = Boolean(project.is_published);
 
     state.editingId = project.id;
@@ -242,6 +244,7 @@
   const resetForm = () => {
     form.reset();
     form.elements.is_published.checked = true;
+    form.elements.show_details.checked = false;
     form.elements.sort_order.value = 100;
     state.editingId = null;
     editorTitle.textContent = "Add project details";
@@ -436,9 +439,20 @@
         }`;
         status.textContent = project.is_published ? "Visible" : "Masque";
 
+        const detailsStatus = document.createElement("span");
+        detailsStatus.className = `admin-project__status ${
+          project.show_details
+            ? "admin-project__status--visible"
+            : "admin-project__status--hidden"
+        }`;
+        detailsStatus.textContent = project.show_details
+          ? "Plus d'info ON"
+          : "Plus d'info OFF";
+
         text.appendChild(title);
         text.appendChild(meta);
         text.appendChild(status);
+        text.appendChild(detailsStatus);
 
         const actions = document.createElement("div");
         actions.className = "admin-project__actions";

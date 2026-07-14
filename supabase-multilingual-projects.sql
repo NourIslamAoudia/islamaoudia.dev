@@ -11,7 +11,12 @@ alter table public.portfolio_projects
   add column if not exists detail_title_it text,
   add column if not exists detail_body_en text,
   add column if not exists detail_body_fr text,
-  add column if not exists detail_body_it text;
+  add column if not exists detail_body_it text,
+  add column if not exists show_details boolean not null default false;
+
+update public.portfolio_projects
+set show_details = true
+where slug in ('lamsa', 'alina-store');
 
 create table if not exists public.portfolio_project_images (
   id uuid primary key default gen_random_uuid(),
